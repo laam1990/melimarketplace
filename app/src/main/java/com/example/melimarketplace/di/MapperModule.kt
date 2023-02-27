@@ -1,5 +1,6 @@
 package com.example.melimarketplace.di
 
+import com.example.melimarketplace.domain.mapper.MarketPlaceDetailMapper
 import com.example.melimarketplace.domain.mapper.MarketPlaceListItemsMapper
 import com.example.melimarketplace.domain.mapper.MarketPlaceMapperFacade
 import com.example.melimarketplace.domain.mapper.MarketPlaceMapperFacadeImpl
@@ -16,8 +17,10 @@ object MapperModule {
     @Provides
     @Singleton
     fun provideListItemsMapperFacadeImpl(
-        mealMapper: MarketPlaceListItemsMapper
+        listItemsMapper: MarketPlaceListItemsMapper,
+        detailMapper: MarketPlaceDetailMapper
     ) = MarketPlaceMapperFacadeImpl(
-        mealMapper
+        listItemsMapper,
+        detailMapper
     ) as MarketPlaceMapperFacade
 }

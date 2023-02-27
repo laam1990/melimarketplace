@@ -1,5 +1,6 @@
 package com.example.melimarketplace.data.api
 
+import com.example.melimarketplace.data.model.detail.ResponseDetailData
 import com.example.melimarketplace.data.model.list.ResponseListData
 import retrofit2.http.Query
 
@@ -11,8 +12,7 @@ interface RemoteDataSource {
         @Query("limit") limit: Int
     ): ResponseListData
 
-    /*suspend fun getDetailById(
+    suspend fun getDetailById(
         @Query("ids") ids: String
-    ): List<>*/
-
+    ): List<ResponseDetailData>
 }

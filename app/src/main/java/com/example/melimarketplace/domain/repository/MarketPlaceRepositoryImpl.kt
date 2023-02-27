@@ -4,8 +4,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingData
 import com.example.melimarketplace.data.api.RemoteDataSource
 import com.example.melimarketplace.data.paging.PagingSource
+import com.example.melimarketplace.data.util.Resource
 import com.example.melimarketplace.data.util.getDefaultPagingConfig
+import com.example.melimarketplace.data.util.networkResourceWithMapper
 import com.example.melimarketplace.domain.mapper.MarketPlaceMapperFacade
+import com.example.melimarketplace.ui.model.DetailViewData
 import com.example.melimarketplace.ui.model.ResultItemViewData
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -24,4 +27,14 @@ class MarketPlaceRepositoryImpl @Inject constructor(
                 PagingSource(remoteDataSource, marketPlaceMapperFacade, query)
             }
         ).flow
+
+    override fun getDetail(id: String): Flow<Resource<DetailViewData>> =
+        networkResourceWithMapper(
+            networkCall = {
+                remoteDataSource.getDetailById(id)
+            },
+            mapperResponse = {
+                marketPlaceMapperFacade.marketPlaceDetailExecuteMapper(it)
+            }
+        )
 }

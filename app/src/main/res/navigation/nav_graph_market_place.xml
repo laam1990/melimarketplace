@@ -5,26 +5,26 @@
     android:id="@+id/nav_graph_market_place"
     app:startDestination="@id/products">
 
-    <!--<action
+    <action
         android:id="@+id/action_to_detail"
-        app:destination="@id/mealDetail"
+        app:destination="@id/productDetail"
         app:enterAnim="@anim/fade_in"
         app:exitAnim="@anim/fade_out"
         app:popEnterAnim="@anim/fade_in"
-        app:popExitAnim="@anim/fade_out" />-->
+        app:popExitAnim="@anim/fade_out" />
 
     <fragment
         android:id="@+id/products"
         android:name="com.example.melimarketplace.ui.fragment.MarketPlaceListFragment"
         tools:layout="@layout/fragment_market_place_list"/>
 
-    <!--<fragment
-        android:id="@+id/mealDetail"
-        android:name="com.example.yape.ui.fragment.MealDetailFragment"
-        tools:layout="@layout/fragment_meal_detail">
+    <fragment
+        android:id="@+id/productDetail"
+        android:name="com.example.melimarketplace.ui.fragment.MarketPlaceDetailFragment"
+        tools:layout="@layout/fragment_market_place_detail">
         <argument
-            android:name="strMeal"
+            android:name="id"
             app:argType="string" />
-    </fragment>-->
+    </fragment>
 
 </navigation>

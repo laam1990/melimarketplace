@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import coil.load
-import com.bumptech.glide.Glide
 import com.example.melimarketplace.R
 import com.example.melimarketplace.databinding.ItemProductBinding
 import com.example.melimarketplace.ui.model.ResultItemViewData

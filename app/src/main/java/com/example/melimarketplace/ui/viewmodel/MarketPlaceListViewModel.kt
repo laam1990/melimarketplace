@@ -18,6 +18,7 @@ class MarketPlaceListViewModel @Inject constructor(private val repository: Marke
 
     private val _marketPlaceItemsLiveData =
         MutableLiveData<PagingData<ResultItemViewData>>()
+
     val marketPlaceItemsLiveData: LiveData<PagingData<ResultItemViewData>> =
         _marketPlaceItemsLiveData
 

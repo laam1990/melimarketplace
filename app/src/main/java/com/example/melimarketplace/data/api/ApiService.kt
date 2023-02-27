@@ -1,6 +1,8 @@
 package com.example.melimarketplace.data.api
 
+import com.example.melimarketplace.data.model.detail.ResponseDetailData
 import com.example.melimarketplace.data.model.list.ResponseListData
+import com.example.melimarketplace.data.util.DataConstant.GET_DETAIL_BY_ID
 import com.example.melimarketplace.data.util.DataConstant.GET_LIST_ITEMS_BY_QUERY
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -19,9 +21,13 @@ interface ApiService {
         @Query("limit") limit: Int
     ): ResponseListData
 
-    /*@GET(GET_DETAIL_BY_ID)
+    /**
+     * Multiget items detail.
+     * https://api.mercadolibre.com/items?ids=MLA1318177291
+     */
+    @GET(GET_DETAIL_BY_ID)
     suspend fun getDetailById(
         @Query("ids") ids: String
-    ): List<>*/
+    ): List<ResponseDetailData>
 
 }
