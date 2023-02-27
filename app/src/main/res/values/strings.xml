@@ -4,5 +4,6 @@
     <string name="menu_search_text">Search…</string>
     <string name="item_price">$ %d</string>
     <string name="error_message">An error has occurred</string>
+    <string name="error_description">This content could not be loaded.\nPlease try again.</string>
     <string name="try_again">Try Again</string>
 </resources>

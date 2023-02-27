@@ -38,6 +38,12 @@ class MarketPlaceDetailFragment : Fragment() {
     }
 
     private fun initViews() {
+        binding?.apply {
+            contentServerError.btnRetry.setOnClickListener {
+                viewModel.getMarketPlaceDetail(args.id)
+            }
+        }
+
         viewModel.getMarketPlaceDetail(args.id)
     }
 
@@ -54,6 +60,7 @@ class MarketPlaceDetailFragment : Fragment() {
     private fun showLoadingView() {
         binding?.apply {
             groupContent.gone()
+            contentServerError.root.gone()
             progressBar.visible()
         }
     }
@@ -63,6 +70,7 @@ class MarketPlaceDetailFragment : Fragment() {
             binding?.apply {
                 groupContent.visible()
                 progressBar.gone()
+                contentServerError.root.gone()
 
                 tvCondition.text = data.condition
                 tvTitle.text = data.title
@@ -85,6 +93,7 @@ class MarketPlaceDetailFragment : Fragment() {
         binding?.apply {
             groupContent.gone()
             progressBar.gone()
+            contentServerError.root.visible()
         }
     }
 
