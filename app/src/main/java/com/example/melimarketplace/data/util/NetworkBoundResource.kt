@@ -13,5 +13,5 @@ inline fun <ResultType, RequestType> networkResourceWithMapper(
     emit(Resource.Success(mapperResponse(networkCall())))
 }.catch { throwable ->
     Log.w(TAG, "networkResource: Resource.Error", throwable)
-    emit(Resource.Error())
+    emit(Resource.Error(throwable))
 }

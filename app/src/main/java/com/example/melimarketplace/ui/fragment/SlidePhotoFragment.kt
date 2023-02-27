@@ -37,6 +37,8 @@ class OnboardingSlideItemFragment : Fragment(), ViewPager2.PageTransformer {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+
+
     }
 
     private fun initViews() {
@@ -50,9 +52,7 @@ class OnboardingSlideItemFragment : Fragment(), ViewPager2.PageTransformer {
         }
     }
 
-    override fun transformPage(page: View, position: Float) {
-
-    }
+    override fun transformPage(page: View, position: Float) {}
 }
 
 class MyPagerOnboardingSlide(
