@@ -6,9 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,9 +45,8 @@ class MarketPlaceListFragment : Fragment() {
     }
 
     private fun initViews() {
-        setHasOptionsMenu(true)
+        setupMenu()
         binding?.apply {
-
             binding?.rvProducts?.apply {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(context)
@@ -66,32 +68,46 @@ class MarketPlaceListFragment : Fragment() {
         }
     }
 
+    private fun setupMenu() {
+        (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
+
+            override fun onPrepareMenu(menu: Menu) {
+                // Handle for example visibility of menu items
+            }
+
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.market_place_menu, menu)
+                val searchItem = menu.findItem(R.id.app_bar_search)
+                val searchView: SearchView = searchItem.actionView as SearchView
+
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        query.orEmpty().let {
+                            if (it.isNotEmpty()) {
+                                viewModel.getProducts(it)
+                            }
+                        }
+                        return true
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        return true
+                    }
+                })
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                // Validate and handle the selected menu item
+                return true
+            }
+
+        }, viewLifecycleOwner)
+    }
+
     private fun initObservers() {
         viewModel.marketPlaceItemsLiveData.observe(viewLifecycleOwner) { pagingData ->
             itemRecyclerViewAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.market_place_menu, menu)
-        val searchItem = menu.findItem(R.id.app_bar_search)
-        val searchView: SearchView = searchItem.actionView as SearchView
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query.orEmpty().let {
-                    if (it.isNotEmpty()) {
-                        viewModel.getProducts(it)
-                    }
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-
-        })
     }
 
     override fun onAttach(context: Context) {

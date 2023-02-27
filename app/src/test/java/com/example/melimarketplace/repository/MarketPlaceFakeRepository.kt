@@ -27,9 +27,7 @@ open class MarketPlaceFakeRepository : MarketPlaceRepository {
             val marketPlaceDetailViewData: DetailViewData = mockk(relaxed = true)
             emit(Resource.Loading())
             if (willReturnError) {
-                emit(
-                    Resource.Error(Throwable())
-                )
+                emit(Resource.Error(Throwable()))
             } else {
                 emit(Resource.Success(marketPlaceDetailViewData))
             }
